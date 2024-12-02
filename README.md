@@ -1,51 +1,126 @@
-# React + TypeScript + Vite
+# 🐱‍🏍 Fullstack Pokémon App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Project Overview
 
-Currently, two official plugins are available:
+The app is built using a **React (Vite)** frontend and a **Node.js (Express.js)** backend. Users can browse the first 150 Pokémon with pagination, view Pokémon details, and add/remove them from a favorites list. The backend provides RESTful APIs to manage Pokémon data and favorites.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### **Demo URL**
+- **Frontend Production (Vercel)**: https://pokemon-client-vert.vercel.app/  
+- **Backend Production (Render)**: https://pokemon-backend-mjgb.onrender.com/
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🛠️ Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+### **Frontend:**
+- **React** with **Vite** for fast development
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling and responsiveness
+- **Axios** for API requests
+- **Deployed on Vercel**
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### **Backend:**
+- **Node.js** with **Express.js** for API handling
+- **TypeScript** for backend logic
+- **Express-Validator** for request validation
+- **Deployed on Render**
+
+---
+
+## 🔍 Frontend Features
+- **Homepage (`/`)**: Displays the first 150 Pokémon with pagination.
+- **Favorites Page (`/favorites`)**: Lists all favorited Pokémon.
+- **Detail Modal**: Shows detailed stats and type relationships.
+- **Responsive Design**: Mobile-first, fully responsive using Tailwind CSS.
+
+---
+
+## 🔗 API Documentation
+
+### **Pokémon API**
+
+| Method | Endpoint            | Description                                     | Request Body                  | Response                                                                  |
+|--------|---------------------|-------------------------------------------------|--------------------------------|---------------------------------------------------------------------------|
+| `GET`  | `/api/pokemon`       | Fetches the list of all available Pokémon       | `None`                         | `200 OK` - Returns an array of Pokémon objects                            |
+| `GET`  | `/api/pokemon/:id`   | Fetches a single Pokémon by its ID              | `None`                         | `200 OK` - Returns the Pokémon object or `404 Not Found` if it doesn't exist |
+
+#### Example: Get All Pokémon
+```bash
+GET /api/pokemon
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+#### Example: Get Pokémon by ID
+```bash
+GET /api/pokemon/1
 ```
-"# pokemon-client" 
+
+---
+
+### **Favorites API**
+
+| Method | Endpoint            | Description                                     | Request Body                  | Response                                                                  |
+|--------|---------------------|-------------------------------------------------|--------------------------------|--------------------------------------------------------------------------|
+| `POST`  | `/api/favorites`       | Adds a Pokémon to the favorites list       | `{ "id": number }`              | `201 Created` - Returns the updated favorites list                       |
+| `DELETE`  | `/api/favorites/:id`   | Removes a Pokémon from the favorites list              | `None`           | `200 OK` - Returns the updated favorites list or `404 Not Found` if it doesn't exist |
+| `GET`  | `/api/favorites`       | Fetches the list of all favorite Pokémon       | `{ "id": number }`              | `201 Created` - Returns an array of favorite Pokémon object            |
+
+#### Example: Add Favorite
+```bash
+POST /api/favorites
+Content-Type: application/json
+{
+  "id": 1
+}
+```
+
+#### Example: Remove Favorite
+```bash
+DELETE /api/favorites/1
+```
+
+#### Example: Get Favorites
+```bash
+GET /api/favorites
+```
+
+---
+
+## 🖥️ Running Locally
+
+### **Prerequisites**
+- Latest LTS version of Node.js and npm should be installed
+
+---
+
+### **Backend Setup**
+1. Clone the repository
+   ```bash
+   git clone git@github.com:sharjilk/pokemon-backend.git
+   cd backend
+   ```
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+3. Run the backend
+   ```bash
+   npm run start
+   ```
+4. Backend runs on `http://localhost:4000/`
+
+---
+
+### **Frontend Setup**
+1. Navigate to the frontend directory:
+   ```bash
+   git clone git@github.com:sharjilk/pokemon-client.git
+   ```
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+3. Start the development server
+   ```bash
+   npm run dev
+   ```
+4. Frontend runs on `http://localhost:5173/`
