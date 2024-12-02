@@ -30,7 +30,9 @@ const FavoritePokemons = () => {
     const loadFavoriteIds = async () => {
       try {
         dispatch(setLoading(true));
-        const response = await axios.get("http://localhost:4000/api/favorites");
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}api/favorites`
+        );
         dispatch(setFavorites(response.data));
         dispatch(setLoading(false));
       } catch (error) {
@@ -54,7 +56,7 @@ const FavoritePokemons = () => {
         dispatch(setLoading(true));
         const favoritePromises = favoriteIds.map((id: number) =>
           axios
-            .get(`http://localhost:4000/api/pokemon/${id}`)
+            .get(`${import.meta.env.VITE_API_URL}api/pokemon/${id}`)
             .then((res) => res.data)
         );
         const favoriteData = await Promise.all(favoritePromises);

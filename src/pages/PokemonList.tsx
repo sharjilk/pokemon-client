@@ -41,7 +41,9 @@ const PokemonList = () => {
         const limit = 50;
         const offset = (currentPage - 1) * limit;
         const response = await axios.get(
-          `http://localhost:4000/api/pokemon?limit=${limit}&offset=${offset}`
+          `${
+            import.meta.env.VITE_API_URL
+          }api/pokemon?limit=${limit}&offset=${offset}`
         );
 
         const PokemonData = response.data.results.map(async (item: Pokemon) => {

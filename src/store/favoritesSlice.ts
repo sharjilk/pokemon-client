@@ -23,7 +23,7 @@ export const addFavoriteAsync = createAsyncThunk<
   "favorites/addFavoriteAsync",
   async (pokemon: PokemonCardProps, { rejectWithValue }) => {
     try {
-      await axios.post("http://localhost:4000/api/favorites", {
+      await axios.post(`${import.meta.env.VITE_API_URL}api/favorites`, {
         id: pokemon.id,
       });
       return pokemon;
@@ -39,7 +39,7 @@ export const removeFavoriteAsync = createAsyncThunk<number[], number>(
   async (pokemonId: number, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/favorites/${pokemonId}`
+        `${import.meta.env.VITE_API_URL}api/favorites/${pokemonId}`
       );
       return response.data as number[];
     } catch (error) {
